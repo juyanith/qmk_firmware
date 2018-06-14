@@ -2,8 +2,8 @@
 
 #define _C_DEL MT(MOD_LCTL, KC_DEL)
 #define _S_BKSP MT(MOD_LSFT, KC_BSPC)
-#define _L2_SPC LT(2, KC_SPC)
-#define _L1_ENT LT(1, KC_ENT)
+#define _L_SPC LT(_RAISE, KC_SPC)
+#define _R_ENT LT(_LOWER, KC_ENT)
 #define _S_TAB RSFT(KC_TAB)
 #define _SC_TAB RSFT(RCTL(KC_TAB))
 #define _C_TAB RCTL(KC_TAB)
@@ -17,13 +17,20 @@
 #define _PASTE LCTL(KC_V)
 #define _G_TAB RGUI(KC_TAB)
 
+enum signum_layers {
+	_MAIN,
+	_LOWER,
+	_RAISE,
+	_ADJUST
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KEYMAP(
 		KC_GRV,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
 		KC_LBRC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		KC_RBRC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
-		TO(1),   KC_ESC,  KC_LGUI, KC_LALT, _C_DEL,  _S_BKSP,      _L2_SPC, _L1_ENT, KC_BSPC, KC_DEL,  KC_APP,  TO(2)  ),
+		TO(1),   KC_ESC,  KC_LGUI, KC_LALT, _C_DEL,  _S_BKSP,      _L_SPC,  _R_ENT,  KC_BSPC, KC_DEL,  KC_APP,  TO(2)  ),
 
 	KEYMAP(
 		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
