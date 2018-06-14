@@ -1,5 +1,4 @@
 # MCU name
-
 MCU = atmega32u4
 
 # Processor frequency.
@@ -33,23 +32,6 @@ ARCH = AVR8
 #     If no clock division is performed on the input clock inside the AVR (via the
 #     CPU clock adjust registers or the clock division fuses), this will be equal to F_CPU.
 F_USB = $(F_CPU)
-
-# Bootloader
-#     This definition is optional, and if your keyboard supports multiple bootloaders of
-#     different sizes, comment this out, and the correct address will be loaded
-#     automatically (+60). See bootloader.mk for all options.
-ifeq ($(strip $(KEYBOARD)), planck/rev3)
-    BOOTLOADER = atmel-dfu
-endif
-ifeq ($(strip $(KEYBOARD)), planck/rev4)
-    BOOTLOADER = atmel-dfu
-endif
-ifeq ($(strip $(KEYBOARD)), planck/rev5)
-    BOOTLOADER = qmk-dfu
-endif
-ifeq ($(strip $(KEYBOARD)), planck/light)
-    BOOTLOADER = atmel-dfu
-endif
 
 # Interrupt driven control endpoint task(+60)
 OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
