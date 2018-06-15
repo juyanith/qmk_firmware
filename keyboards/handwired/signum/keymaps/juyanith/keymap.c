@@ -30,7 +30,7 @@
 enum signum_keycodes {
   _BKSDEL  = SAFE_RANGE, 
   _SPCRTN,
-  _LTSPRT
+  _L_SPEN
 };
 
 enum signum_layers {
@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
 		KC_LBRC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		KC_RBRC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
-		KC_SPC, KC_ESC,  KC_LGUI, KC_LALT, _C_DEL,  _S_BSPC,      _LTSPRT, _LTENT,  KC_BSPC, KC_DEL,  KC_APP,  _SPCRTN),
+		KC_SPC, KC_ESC,  KC_LGUI, KC_LALT, _C_DEL,  _S_BSPC,       _L_SPEN, _LTENT,  KC_BSPC, KC_DEL,  KC_APP,  _SPCRTN),
 
 	KEYMAP(
 		KC_DOT,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL, 
@@ -68,14 +68,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-void LT_Shift(int layer, uint16_t keycode, uint16_t kc_shifted, keyrecord_t *record) {
+void layer_shift_tap(int layer, uint16_t keycode, uint16_t kc_shifted, keyrecord_t *record) {
 	static uint16_t timer = 0;
 	
 	if (record->event.pressed) {
 		timer = timer_read();
-		layer_on(_LOWER);
+		layer_on(layer);
 	} else {
-		layer_off(_LOWER);
+		layer_off(layer);
 		if (timer_elapsed(timer) < TAPPING_TERM) {
 			if (keyboard_report->mods & MODS_SHIFT_MASK) {
 				register_code (kc_shifted);
@@ -112,8 +112,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			}
 			return false;
 
-		case _LTSPRT:
-			LT_Shift(_LOWER, KC_SPC, KC_ENTER, record);
+		case _L_SPEN:
+			layer_shift_tap(_LOWER, KC_SPC, KC_ENTER, record);
 			return false;
 	  
 		default:
