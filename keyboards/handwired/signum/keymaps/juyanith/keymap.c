@@ -68,15 +68,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+static bool shift_interrupted = false;
+
 void layer_shift_tap(int layer, uint16_t keycode, uint16_t kc_shifted, keyrecord_t *record) {
-	static uint16_t timer = 0;
+	static uint16_t shift_timer = 0;
 	
 	if (record->event.pressed) {
-		timer = timer_read();
+		shift_interrupted = false;
+		shift_timer = timer_read();
 		layer_on(layer);
 	} else {
 		layer_off(layer);
-		if (timer_elapsed(timer) < TAPPING_TERM) {
+		if (!shift_interrupted && timer_elapsed(shift_timer) < TAPPING_TERM) {
 			if (keyboard_report->mods & MODS_SHIFT_MASK) {
 				register_code (kc_shifted);
 				unregister_code(kc_shifted);
@@ -84,6 +87,7 @@ void layer_shift_tap(int layer, uint16_t keycode, uint16_t kc_shifted, keyrecord
 				register_code (keycode);
 				unregister_code(keycode);
 			}
+			shift_interrupted = true;
 		}
 	}
 }
@@ -117,6 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			return false;
 	  
 		default:
+			shift_interrupted = true;
 			return true; // Process all other keycodes normally
 	}
 }
