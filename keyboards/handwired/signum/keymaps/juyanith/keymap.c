@@ -13,10 +13,6 @@
 #define _C_DOWN LCTL(KC_DOWN)
 #define _C_LEFT RCTL(KC_LEFT)
 #define _C_RGHT RCTL(KC_RGHT)
-#define _UNDO LCTL(KC_Z)
-#define _CUT LCTL(KC_X)
-#define _COPY LCTL(KC_C)
-#define _PASTE LCTL(KC_V)
 #define _G_TAB RGUI(KC_TAB)
 
 #define TO_LOWR TO(_SYMBOL)
@@ -29,8 +25,12 @@
 #endif
 
 enum signum_keycodes {
-  M_SYMBL = SAFE_RANGE, 
-  M_NAV
+	COPY  = SAFE_RANGE,
+	CUT,
+	PASTE,
+	M_SYMBL, 
+	M_NAV,
+	UNDO
 };
 
 enum signum_layers {
@@ -57,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_NAVIGATION] = KEYMAP(
 		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
 		KC_PSCR, _S_TAB,  _SC_TAB, _C_TAB,  KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
-		KC_INS,  _UNDO,   _CUT,    _COPY,   _PASTE,  _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_PAUS, 
-		_______, _______, _______, _______, _C_DEL,  _ADJBSP,      _______, _______, _______, _______, _______, _______),
+		KC_INS,  UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_PAUS, 
+		_______, _______, _______, _______, _C_DEL,  KC_LSFT,      _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = KEYMAP(
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
@@ -70,39 +70,110 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 static bool layer_interrupted[] = { false, false, false, false };
 static uint16_t layer_timers[] = { 0, 0, 0, 0 };
-static bool shift_removed = false;
 
-void layer_mod_tap(int layer,uint16_t keycode, uint16_t kc_shifted, keyrecord_t *record) {
-	if (record->event.pressed) {
-		layer_interrupted[layer] = false;
-		layer_timers[layer] = timer_read();
-		layer_on(layer);
-		shift_removed = keyboard_report->mods & MOD_BIT(KC_LSHIFT);
-		if (shift_removed) del_mods(MOD_LSFT);
-	} else {
-		layer_off(layer);
-		if (shift_removed) add_mods(MOD_LSFT);
-		if (!layer_interrupted[layer] && timer_elapsed(layer_timers[layer]) < TAPPING_TERM) {
-			if (shift_removed) {
-				register_code (kc_shifted);
-				unregister_code(kc_shifted);
-			} else { 
-				register_code (keycode);
-				unregister_code(keycode);
-			}
-			layer_interrupted[layer] = true;
+void layer_mod_pressed(int layer,uint16_t keycode, uint16_t kc_shifted) {
+	layer_interrupted[layer] = false;
+	layer_timers[layer] = timer_read();
+	layer_on(layer);
+}
+
+void layer_mod_released(int layer, uint16_t keycode, uint16_t kc_shifted) {
+	layer_off(layer);
+	if (!layer_interrupted[layer] && timer_elapsed(layer_timers[layer]) < TAPPING_TERM) {
+		if (keyboard_report->mods & MODS_SHIFT_MASK) {
+			register_code (kc_shifted);
+			unregister_code(kc_shifted);
+		} else { 
+			register_code (keycode);
+			unregister_code(keycode);
 		}
+		layer_interrupted[layer] = true;
 	}
 }
 
+static bool shift_removed = false;
+
+void unshift_pressed(uint16_t keycode) {
+	shift_removed = keyboard_report->mods & MODS_SHIFT_MASK;
+	if (shift_removed) {
+		del_mods(MOD_LSFT);
+	}
+	register_code(keycode);
+}
+
+void unshift_released(uint16_t keycode) {
+	if (shift_removed) {
+		add_mods(MOD_LSFT);
+	}
+	unregister_code(keycode);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	switch (keycode) { 
+	switch (keycode) {
+		case COPY:
+			if (record->event.pressed) {
+				add_mods(MOD_LCTL);
+				unshift_pressed(KC_C);
+			} else {
+				unshift_released(KC_C);
+				del_mods(MOD_LCTL);
+			}
+			return false;
+			break;
+
+		case CUT:
+			if (record->event.pressed) {
+				add_mods(MOD_LCTL);
+				unshift_pressed(KC_X);
+			} else {
+				unshift_released(KC_X);
+				del_mods(MOD_LCTL);
+			}
+			return false;
+			break;
+
+		case PASTE:
+			if (record->event.pressed) {
+				add_mods(MOD_LCTL);
+				unshift_pressed(KC_V);
+			} else {
+				unshift_released(KC_V);
+				del_mods(MOD_LCTL);
+			}
+			return false;
+			break;
+			
+		case UNDO:
+			if (record->event.pressed) {
+				add_mods(MOD_LCTL);
+				unshift_pressed(KC_Z);
+			} else {
+				unshift_released(KC_Z);
+				del_mods(MOD_LCTL);
+			}
+			return false;
+			break;
+			
 		case M_NAV: 
-			layer_mod_tap(_NAVIGATION, KC_ENT, KC_SPC, record);
+			if (record->event.pressed) {
+				layer_mod_pressed(_NAVIGATION, KC_ENT, KC_SPC);
+			} else {
+				layer_mod_released(_NAVIGATION, KC_ENT, KC_SPC);
+			}
 			return false;
 
 		case M_SYMBL: 
-			layer_mod_tap(_SYMBOL, KC_SPC, KC_ENT, record);
+			if (record->event.pressed) {
+				// Remove and preserve shift modifier.
+				shift_removed = keyboard_report->mods & MODS_SHIFT_MASK;
+				if (shift_removed) del_mods(MOD_LSFT);
+				
+				layer_mod_pressed(_SYMBOL, KC_SPC, KC_ENT);
+			} else {
+				if (shift_removed) add_mods(MOD_LSFT);
+				
+				layer_mod_released(_SYMBOL, KC_SPC, KC_ENT);
+			}
 			return false;
 
 		default:
