@@ -1,5 +1,3 @@
-#include "signum.h"
-
 #define _ADJBSP LT(_ADJUST, KC_BSPC)
 
 #define _C_A_D LALT(LCTL(KC_DEL))
@@ -9,6 +7,12 @@
 #define _C_DOWN LCTL(KC_DOWN)
 #define _C_LEFT RCTL(KC_LEFT)
 #define _C_RGHT RCTL(KC_RGHT)
+
+#define _D_PLA1 DYN_MACRO_PLAY1
+#define _D_PLA2 DYN_MACRO_PLAY2
+#define _D_STA1 DYN_REC_START1
+#define _D_STA2 DYN_REC_START2
+#define _D_STOP DYN_REC_STOP
 
 #define _G_TAB RGUI(KC_TAB)
 
@@ -22,14 +26,27 @@
 
 #define _T_QWRT TG(_QUERTY)
 
-enum signum_keycodes {
+#define _TD_ABR TD(ANGLE_BRACKETS)
+#define _TD_SBR TD(SQUARE_BRACKETS)
+#define _TD_CBR TD(CURLY_BRACES)
+#define _TD_PRN TD(PARENTHESES)
+
+#include "signum.h"
+
+// Macros
+enum {
 	COPY  = SAFE_RANGE,
 	CUT,
 	PASTE,
-	UNDO
+	UNDO,
+	DYNAMIC_MACRO_RANGE
 };
 
-enum signum_layers {
+// NOTE: Must be after definition of DYNAMIC_MACRO_RANGE
+#include "dynamic_macro.h"
+
+// Layers
+enum {
 	_COLEMAK,
 	_QUERTY,
 	_SYMBOL,
@@ -37,12 +54,20 @@ enum signum_layers {
 	_ADJUST
 };
 
+//Tapdance
+enum {
+	ANGLE_BRACKETS,
+	CURLY_BRACES,
+	PARENTHESES,
+    SQUARE_BRACKETS,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_COLEMAK] = KEYMAP(
-		KC_GRV,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
-		KC_LBRC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
-		KC_RBRC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
+		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
+		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
+		_______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
 		KC_LGUI, KC_PAUS, KC_PSCR, KC_LALT, _C_DEL,  _S_BSPC,      _L_SYM, _L_NAV,   KC_BSPC, KC_DEL,  KC_APP,  KC_ESC),
 		
 	[_QUERTY] = KEYMAP(
@@ -52,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
 	[_SYMBOL] = KEYMAP(
-		KC_DOT,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL, 
-		KC_LBRC, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DQUO, 
-		KC_RBRC, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,      KC_LCBR, KC_RCBR, KC_LABK, KC_RABK, KC_QUES, KC_PIPE, 
+		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, 
+		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, _TD_PRN, KC_RPRN, _______, 
+		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,      _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______, 
 		_______, _______, _______, _______, _______, _ADJBSP,      _______, _______, _______, _______, _______, _______),
 
 	[_NAVIGATION] = KEYMAP(
@@ -64,10 +89,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = KEYMAP(
-		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_A_D,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,      _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,      _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,      _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_A_D)
 
 };
 
@@ -84,6 +109,10 @@ void ctrl_unshift(uint16_t keycode) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	if (!process_record_dynamic_macro(keycode, record)) {
+        return false;
+    }
+	
 	switch (keycode) {
 		case COPY:
 			if (record->event.pressed) {
@@ -117,3 +146,80 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			return true; // Process all other keycodes normally
 	}
 }
+
+void dance_angle_brackets_finished (qk_tap_dance_state_t *state, void *user_data) {
+	register_code(KC_RSFT);
+	if (state->count == 1) {
+		register_code(KC_COMMA);
+	} else {
+		register_code(KC_DOT);
+	}
+}
+
+void dance_angle_brackets_reset (qk_tap_dance_state_t *state, void *user_data) {
+	unregister_code(KC_RSFT);
+	if (state->count == 1) {
+		unregister_code(KC_COMMA);
+	} else {
+		unregister_code(KC_DOT);
+	}
+}
+
+void dance_curly_braces_finished (qk_tap_dance_state_t *state, void *user_data) {
+	register_code(KC_RSFT);
+	if (state->count == 1) {
+		register_code(KC_LBRC);
+	} else {
+		register_code(KC_RBRC);
+	}
+}
+
+void dance_curly_braces_reset (qk_tap_dance_state_t *state, void *user_data) {
+	unregister_code(KC_RSFT);
+	if (state->count == 1) {
+		unregister_code(KC_LBRC);
+	} else {
+		unregister_code(KC_RBRC);
+	}
+}
+
+void dance_parentheses_finished (qk_tap_dance_state_t *state, void *user_data) {
+	register_code(KC_RSFT);
+	if (state->count == 1) {
+		register_code(KC_9);
+	} else {
+		register_code(KC_0);
+	}
+}
+
+void dance_parentheses_reset (qk_tap_dance_state_t *state, void *user_data) {
+	unregister_code(KC_RSFT);
+	if (state->count == 1) {
+		unregister_code(KC_9);
+	} else {
+		unregister_code(KC_0);
+	}
+}
+
+void dance_square_brackets_finished (qk_tap_dance_state_t *state, void *user_data) {
+	if (state->count == 1) {
+		register_code(KC_LBRC);
+	} else {
+		register_code(KC_RBRC);
+	}
+}
+
+void dance_square_brackets_reset (qk_tap_dance_state_t *state, void *user_data) {
+	if (state->count == 1) {
+		unregister_code(KC_LBRC);
+	} else {
+		unregister_code(KC_RBRC);
+	}
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+	[ANGLE_BRACKETS] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_angle_brackets_finished, dance_angle_brackets_reset),
+	[CURLY_BRACES] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_curly_braces_finished, dance_curly_braces_reset),
+	[PARENTHESES] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_parentheses_finished, dance_parentheses_reset),
+	[SQUARE_BRACKETS] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_square_brackets_finished, dance_square_brackets_reset),
+};
