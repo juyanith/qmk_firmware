@@ -37,6 +37,7 @@
 enum {
 	COPY  = SAFE_RANGE,
 	CUT,
+	KILL,
 	PASTE,
 	UNDO,
 	DYNAMIC_MACRO_RANGE
@@ -84,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NAVIGATION] = KEYMAP(
 		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
-		_______, _S_TAB,  _SC_TAB, _C_TAB,  KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
+		KILL,    _S_TAB,  _SC_TAB, _C_TAB,  KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
 		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, 
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
@@ -98,13 +99,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Used to send ctrl-key while ignoring shift which is useful on the navigation layer 
 // because holding down shift to select is commonly done.
-void ctrl_unshift(uint16_t keycode) {
+void mod_unshift(uint16_t kc_mod, uint16_t keycode) {
 	uint8_t mods_bkp = keyboard_report->mods;
 	del_mods(MOD_LSFT & MOD_RSFT);
-	register_code(KC_RCTRL); // registering a keypress here works better than add_mods
+	
+	if (kc_mod)
+	{
+		// registering a keypress seems to work better than add_mods 
+		register_code(kc_mod); 
+	}
 	register_code(keycode);
-	unregister_code(keycode); 
-	unregister_code(KC_RCTRL);
+	unregister_code(keycode);
+	if (kc_mod)
+	{
+		unregister_code(kc_mod);
+	}
+	
+	// restore mod state
 	set_mods(mods_bkp);
 }
 
@@ -116,28 +127,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
 		case COPY:
 			if (record->event.pressed) {
-				ctrl_unshift(KC_C);
+				mod_unshift(KC_RCTRL, KC_C);
 			}
 			return false;
 			break;
 
 		case CUT:
 			if (record->event.pressed) {
-				ctrl_unshift(KC_X);
+				mod_unshift(KC_RCTRL, KC_X);
+			}
+			return false;
+			break;
+
+		case KILL:
+			if (record->event.pressed) {
+				mod_unshift(0, KC_HOME);
+				register_code(KC_RSFT);
+				register_code(KC_DOWN);
+				unregister_code(KC_DOWN);
+				unregister_code(KC_RSFT);
+				mod_unshift(KC_RCTRL, KC_X);
 			}
 			return false;
 			break;
 
 		case PASTE:
 			if (record->event.pressed) {
-				ctrl_unshift(KC_V);
+				mod_unshift(KC_RCTRL, KC_V);
 			}
 			return false;
 			break;
 			
 		case UNDO:
 			if (record->event.pressed) {
-				ctrl_unshift(KC_Z);
+				mod_unshift(KC_RCTRL, KC_Z);
 			}
 			return false;
 			break;
