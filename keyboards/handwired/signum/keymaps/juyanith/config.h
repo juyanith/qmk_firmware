@@ -3,6 +3,7 @@
 
 #include "config_common.h"
 
+#define IGNORE_MOD_TAP_INTERRUPT
 #define PREVENT_STUCK_MODIFIERS
 
 #endif
