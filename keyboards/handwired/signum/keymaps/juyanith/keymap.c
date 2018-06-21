@@ -40,6 +40,7 @@ enum {
 	KILL,
 	PASTE,
 	UNDO,
+	YANK,
 	DYNAMIC_MACRO_RANGE
 };
 
@@ -85,13 +86,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NAVIGATION] = KEYMAP(
 		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
-		KILL,    _S_TAB,  _SC_TAB, _C_TAB,  KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
+		_______, _______, KILL,    YANK,    KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
 		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, 
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = KEYMAP(
 		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,      _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,      _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,      _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,      _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
 		KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_A_D)
 
@@ -161,6 +162,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case UNDO:
 			if (record->event.pressed) {
 				mod_unshift(KC_RCTRL, KC_Z);
+			}
+			return false;
+			break;
+			
+		case YANK:
+			if (record->event.pressed) {
+				register_code(KC_RSFT);
+				register_code(KC_RCTRL);
+				register_code(KC_V);
+				unregister_code(KC_V);
+				unregister_code(KC_RCTRL);
+				unregister_code(KC_RSFT);
+				mod_unshift(KC_RCTRL, KC_V);
 			}
 			return false;
 			break;
