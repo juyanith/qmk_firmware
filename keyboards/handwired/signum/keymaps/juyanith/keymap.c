@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NAVIGATION] = KEYMAP(
 		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
-		_______, _______, KILL,    YANK,    KC_TAB,  _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
+		_______, _______, _______, KILL,    YANK,    _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
 		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, 
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
@@ -142,10 +142,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 		case KILL:
 			if (record->event.pressed) {
-				mod_unshift(0, KC_HOME);
+				mod_unshift(0, KC_END);
+				mod_unshift(0, KC_RIGHT);
 				register_code(KC_RSFT);
-				register_code(KC_DOWN);
-				unregister_code(KC_DOWN);
+				register_code(KC_UP);
+				unregister_code(KC_UP);
 				unregister_code(KC_RSFT);
 				mod_unshift(KC_RCTRL, KC_X);
 			}
