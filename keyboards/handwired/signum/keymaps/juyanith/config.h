@@ -4,6 +4,8 @@
 #include "config_common.h"
 
 #define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
 #define PREVENT_STUCK_MODIFIERS
+#define TAPPING_FORCE_HOLD
 
 #endif
