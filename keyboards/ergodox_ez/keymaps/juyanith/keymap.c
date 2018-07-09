@@ -6,12 +6,19 @@
 #define _ADJBSP LT(_ADJUST, KC_BSPC)
 
 #define _C_A_D LALT(LCTL(KC_DEL))
+#define _C_S_E LSFT(LCTL(KC_ESC))
 #define _C_DEL CTL_T(KC_DEL)
 #define _C_TAB RCTL(KC_TAB)
 #define _C_UP LCTL(KC_UP)
 #define _C_DOWN LCTL(KC_DOWN)
 #define _C_LEFT RCTL(KC_LEFT)
 #define _C_RGHT RCTL(KC_RGHT)
+
+#define _D_PLA1 DYN_MACRO_PLAY1
+#define _D_PLA2 DYN_MACRO_PLAY2
+#define _D_STA1 DYN_REC_START1
+#define _D_STA2 DYN_REC_START2
+#define _D_STOP DYN_REC_STOP
 
 #define _G_TAB RGUI(KC_TAB)
 
@@ -20,6 +27,8 @@
 
 #define _S_BSPC SFT_T(KC_BSPC)
 #define _S_TAB RSFT(KC_TAB)
+
+#define _T_SYM TG(_SYMBOL)
 
 #define _SC_TAB RSFT(RCTL(KC_TAB))
 
@@ -47,48 +56,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	/* Keymap 0: Basic layer
 	 *
 	 * ,--------------------------------------------------.           ,--------------------------------------------------.
-	 * |   `    |   1  |   2  |   3  |   4  |   5  | ESC  |           | PANIC|   6  |   7  |   8  |   9  |   0  |   -    |
+	 * |    `   |   1  |   2  |   3  |   4  |   5  | ESC  |           | PANIC|   6  |   7  |   8  |   9  |   0  |   -    |
 	 * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-	 * |   `    |   Q  |   W  |   F  |   P  |   G  |  L1  |           |  L1  |   J  |   L  |   U  |   Y  |   ;  |   =    |
+	 * |   Tab  |   Q  |   W  |   F  |   P  |   G  |  L1  |           |  L1  |   J  |   L  |   U  |   Y  |   ;  |   =    |
 	 * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-	 * |   [    |   A  |   R  |   S  |   T  |   D  |------|           |------|   H  |   N  |   E  |   I  |   O  |   '    |
+	 * |    [   |   A  |   R  |   S  |   T  |   D  |------|           |------|   H  |   N  |   E  |   I  |   O  |   '    |
 	 * |--------+------+------+------+------+------| Hyper|           | Meh  |------+------+------+------+------+--------|
-	 * |   ]    |   Z  |   X  |   C  |   V  |   B  |      |           |      |   K  |   M  |   ,  |   .  |   /  |   \    |
+	 * |    ]   |   Z  |   X  |   C  |   V  |   B  |      |           |      |   K  |   M  |   ,  |   .  |   /  |   \    |
 	 * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-	 *   |  OS  | PAUS | PRSC | Alt  | Ctrl |                                       |  L1  |  L2  | BKSP | DEL  | ESC  |
+	 *   |  OS  | PAUS | PRSC | Alt  | Ctrl |                                       |  L1  | Meta | Menu | Ins  |  OS  |
 	 *   `----------------------------------'                                       `----------------------------------'
 	 *                                        ,-------------.       ,-------------.
-	 *                                        |      |      |       |      |      |
+	 *                                        | Del  |      |       |      | Tab  |
 	 *                                 ,------|------|------|       |------+--------+------.
 	 *                                 |      |      |      |       |      |        |      |
-	 *                                 | Shift|      |------|       |------|        |Space |
-	 *                                 |      |      |      |       |      |        |      |
+	 *                                 | Shift| Bksp |------|       |------| Enter  |Space |
+	 *                                 |      |      | End  |       | Home |        |      |
 	 *                                 `--------------------'       `----------------------'
 	 */
 	[_COLEMAK] = LAYOUT_ergodox(  // layer 0 : default
 		// left hand
-		KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LEFT,
-		KC_GRV,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    TG(_SYMBOL),
+		KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_ESC,
+		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    _T_SYM,
 		KC_LBRC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,
 		KC_RBRC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _HYPER,
-		KC_LGUI, KC_PAUS, KC_PSCR, KC_LALT, _C_DEL, 
-													 _______, _______,
+		KC_PRSC, KC_PAUS, KC_LGUI, KC_LALT, _C_DEL, 
+													 KC_DEL,  _______,
 		                                                      _______,
 											_S_BSPC, KC_BSPC, KC_END,
 		// right hand
 		_C_A_D,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-		TG(_SYMBOL),KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
+		_T_SYM,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
 		         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		_MEH,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		                  _L_NAV,  KC_BSPC, KC_DEL,  KC_APP,  KC_ESC,
-		_______, _______,
+		                  _L_NAV,  _______, KC_APP,  KC_INS,  KC_RGUI,
+		_______, KC_TAB,
 		_______,
-		_______, KC_ENT,  _L_SYM
+		KC_HOME, KC_ENT,  _L_SYM
     ),
 	/* Keymap 1: Symbol Layer
 	 *
 	 * ,---------------------------------------------------.           ,--------------------------------------------------.
-	 * |Version  |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+	 * |         |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
 	 * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
 	 * |         |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   =    |
 	 * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -96,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	 * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
 	 * |         |   ~  |   `  |   -  |   +  |   _  |      |           |      |   {  |   }  |   <  |   >  |   ?  |   |    |
 	 * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-	 *   | EPRM  |      |      |      |      |                                       |      |      |      |      |      |
+	 *   |       |      |      |      |      |                                       |      |      |      |      |      |
 	 *   `-----------------------------------'                                       `----------------------------------'
 	 *                                        ,-------------.       ,-------------.
 	 *                                        |      |      |       |      |      |
@@ -130,21 +139,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	/* Keymap 2: Movement keys
 	 *
 	 * ,--------------------------------------------------.           ,--------------------------------------------------.
-	 * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+	 * |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |      |           |      |  F7  |  F8  |  F9  | F10  | F11  |  F12   |
 	 * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-	 * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
+	 * |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |      |           |      |  F7  |  F8  |  F9  | F10  | F11  |  F12   |
 	 * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-	 * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |  Play  |
+	 * | KClear |      |      | Kill | Yank | Pup  |------|           |------|WLeft | Left | Down |  Up  |Right | WRight |
 	 * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-	 * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+	 * |        | Undo | Cut  | Copy |Paste | Pdn  |      |           |      |      | Home | Pgdn | Pgup | End  |        |
 	 * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-	 *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
+	 *   |      |      |      |      |      |                                       |      |      |      |      |      |
 	 *   `----------------------------------'                                       `----------------------------------'
 	 *                                        ,-------------.       ,-------------.
 	 *                                        |      |      |       |      |      |
 	 *                                 ,------|------|------|       |------+------+------.
-	 *                                 |      |      |      |       |      |      |Brwser|
-	 *                                 |      |      |------|       |------|      |Back  |
+	 *                                 |      |      |      |       |      |      |      |
+	 *                                 |      |      |------|       |------|      |      |
 	 *                                 |      |      |      |       |      |      |      |
 	 *                                 `--------------------'       `--------------------'
 	 */
@@ -174,13 +183,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	 * ,--------------------------------------------------.           ,--------------------------------------------------.
 	 * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
 	 * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-	 * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+	 * |        |      |      |      |      |M1Strt|      |           |      |M2Strt|      |      |      |      |        |
 	 * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-	 * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+	 * |        |      |      |      |      |M1Play|------|           |------|M2Play|      |      |      |      |        |
 	 * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-	 * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+	 * |        |      |      |      |      |MStop |      |           |      |MStop |      |      |      |      |        |
 	 * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-	 *   |      |      |      |      |      |                                       |      |      |      |      |      |
+	 *   |      |      |      |      | CAE  |                                       | CAD  |      |      |      |      |
 	 *   `----------------------------------'                                       `----------------------------------'
 	 *                                        ,-------------.       ,-------------.
 	 *                                        |      |      |       |      |      |
@@ -193,20 +202,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Adjust layer
 	[_ADJUST] = LAYOUT_ergodox(
 		// left hand
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1, XXXXXXX,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP, XXXXXXX,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_S_E,
 													 XXXXXXX, XXXXXXX,
 		                                                      XXXXXXX,
 											_______, XXXXXXX, XXXXXXX,
 		// right hand
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		XXXXXXX, _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		         _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		XXXXXXX, _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		                  _C_A_D,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX,
 		XXXXXXX,
 		XXXXXXX, XXXXXXX, _______
