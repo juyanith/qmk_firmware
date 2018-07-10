@@ -36,8 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // wiring of each half
 #define MATRIX_ROW_PINS { C6, D7, E6, B4, B5 }		//  5,  6,  7,  8,  9
-#define MATRIX_COL_PINS { F6, F7, B1, B3, B2, B6 }	// A1, A0, 15, 14, 16, 10
-// #define MATRIX_COL_PINS { B6, B2, B3, B1, F7, F6 } //uncomment this line and comment line above if you need to reverse left-to-right key order
+#define MATRIX_COL_PINS { B6, B2, B3, B1, F7, F6 }	// 10, 16, 14, 15, A0, A1
+//#define MATRIX_COL_PINS { F6, F7, B1, B3, B2, B6 }	//uncomment this line and comment line above if you need to reverse left-to-right key order
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
