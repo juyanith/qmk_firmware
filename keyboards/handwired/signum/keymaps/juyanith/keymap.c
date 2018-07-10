@@ -20,9 +20,6 @@
 #define _L_NAV LT(_NAVIGATION, KC_ENT)
 #define _L_SYM LT(_SYMBOL, KC_SPC)
 
-#define _S_A SFT_T(KC_A)
-#define _S_O SFT_T(KC_O)
-#define _S_SCLN SFT_T(KC_SCLN)
 #define _S_BSPC SFT_T(KC_BSPC)
 #define _S_TAB RSFT(KC_TAB)
 
@@ -73,13 +70,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_COLEMAK] = KEYMAP(
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
-		KC_MINS, _S_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    _S_O,    KC_QUOT, 
-		_TD_SBR, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
+		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
+		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
 		KC_LGUI, KC_PAUS, KC_PSCR, KC_LALT, _C_DEL,  _S_BSPC,      _L_SYM, _L_NAV,   KC_BSPC, KC_DEL,  KC_APP,  KC_ESC),
 		
 	[_QUERTY] = KEYMAP(
 		_______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _______, 
-		_______, _S_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    _S_SCLN, _______, 
+		_______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, _______, 
 		_______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______, 
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
