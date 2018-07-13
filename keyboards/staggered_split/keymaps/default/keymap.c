@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                                              KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,
 		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                                              KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                              KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		                  KC_LGUI, KC_LALT, _C_DEL,  _S_BSPC, KC_BSPC, KC_ESC,        KC_BSPC, KC_ENT,  _L_SYM,  _L_NAV,  KC_APP, KC_INS),
+		                  KC_LGUI, KC_LALT, _C_DEL,  _S_BSPC, KC_BSPC, KC_ESC,        KC_DEL,  KC_ENT,  _L_SYM,  _L_NAV,  KC_APP, KC_INS),
 
 	[_QUERTY] = LAYOUT_ortho_5x12(
     _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
 		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                           KC_CIRC, KC_AMPR, KC_ASTR, _TD_PRN, KC_RPRN, _______,
 		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,                                           _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______,
-		                  _______, _______, _______, _______, _ADJBSP, _______,       _______, _______, _______, _______, _______, _______),
+		                  _______, _______, _______, _ADJBSP, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_NAVIGATION] = LAYOUT_ortho_5x12(
     _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,                                           _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		KC_INS,  RESET,   XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,                                           _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,                                           _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _C_S_E,        _C_A_D,  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+		                  XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, _C_S_E,        _C_A_D,  XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX)
 
 };
 
