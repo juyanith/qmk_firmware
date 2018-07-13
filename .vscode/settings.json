@@ -12,6 +12,9 @@
         "*.c": "c",
         "*.cpp": "cpp",
         "*.hpp": "cpp",
-        "xstddef": "c"
+        "xstddef": "c",
+        "chrono": "c",
+        "xhash": "c",
+        "xtree": "c"
     }
 }
