@@ -63,53 +63,53 @@ enum {
 	ANGLE_BRACKETS,
 	CURLY_BRACES,
 	PARENTHESES,
-    SQUARE_BRACKETS,
+  SQUARE_BRACKETS,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_COLEMAK] = KEYMAP(
-		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
-		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
-		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS, 
+		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,
+		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
 		KC_LGUI, KC_PAUS, KC_PSCR, KC_LALT, _C_DEL,  _S_BSPC,      _L_SYM, _L_NAV,   KC_BSPC, KC_DEL,  KC_APP,  KC_ESC),
-		
+
 	[_QUERTY] = KEYMAP(
-		_______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _______, 
-		_______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, _______, 
-		_______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______, 
+		_______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _______,
+		_______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, _______,
+		_______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______,
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
 	[_SYMBOL] = KEYMAP(
-		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, 
-		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, _TD_PRN, KC_RPRN, _______, 
-		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,      _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______, 
+		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, _TD_PRN, KC_RPRN, _______,
+		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,      _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______,
 		_______, _______, _______, _______, _______, _ADJBSP,      _______, _______, _______, _______, _______, _______),
 
 	[_NAVIGATION] = KEYMAP(
-		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, 
-		KILLCLR, _______, _______, KILL,    YANK,    _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT, 
-		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, 
+		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+		KILLCLR, _______, _______, KILL,    YANK,    _C_UP,        _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
+		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,      _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
 		_______, _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = KEYMAP(
-		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,      _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,      _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
-		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,      _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,      _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,      _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,      _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_S_E,  _______,      _______, _C_A_D,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
 
 };
 
-// Used to send ctrl-key while ignoring shift which is useful on the navigation layer 
+// Used to send ctrl-key while ignoring shift which is useful on the navigation layer
 // because holding down shift to select is commonly done.
 void mod_unshift(uint16_t kc_mod, uint16_t keycode) {
 	uint8_t mods_bkp = keyboard_report->mods;
 	del_mods(MOD_LSFT & MOD_RSFT);
-	
+
 	if (kc_mod)
 	{
-		// registering a keypress seems to work better than add_mods 
-		register_code(kc_mod); 
+		// registering a keypress seems to work better than add_mods
+		register_code(kc_mod);
 	}
 	register_code(keycode);
 	unregister_code(keycode);
@@ -117,7 +117,7 @@ void mod_unshift(uint16_t kc_mod, uint16_t keycode) {
 	{
 		unregister_code(kc_mod);
 	}
-	
+
 	// restore mod state
 	set_mods(mods_bkp);
 }
@@ -126,7 +126,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (!process_record_dynamic_macro(keycode, record)) {
         return false;
     }
-	
+
 	switch (keycode) {
 		case COPY:
 			if (record->event.pressed) {
@@ -175,14 +175,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			}
 			return false;
 			break;
-			
+
 		case UNDO:
 			if (record->event.pressed) {
 				mod_unshift(KC_RCTRL, KC_Z);
 			}
 			return false;
 			break;
-			
+
 		case YANK:
 			if (record->event.pressed) {
 				register_code(KC_RSFT);
