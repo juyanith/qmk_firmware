@@ -85,21 +85,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		                  _______, _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_SYMBOL] = LAYOUT_ortho_5x12(
-    _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
 		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
 		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                           KC_CIRC, KC_AMPR, KC_ASTR, _TD_PRN, KC_RPRN, _______,
 		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,                                           _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______,
 		                  _______, _______, _______, _ADJBSP, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_NAVIGATION] = LAYOUT_ortho_5x12(
-    _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
-		KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
 		KILLCLR, _______, _______, KILL,    YANK,    _C_UP,                                             _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
 		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,                                           _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
 		                  _______, _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = LAYOUT_ortho_5x12(
-    _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,                                           _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		KC_INS,  RESET,   XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,                                           _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,                                           _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
