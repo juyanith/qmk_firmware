@@ -35,11 +35,13 @@ extern keymap_config_t keymap_config;
 
 // Macros
 enum {
-	COPY  = SAFE_RANGE,
+  ALL = SAFE_RANGE,
+	COPY,
 	CUT,
 	KILL,
 	KILLCLR,
 	PASTE,
+  SAVE,
 	UNDO,
 	YANK,
 	DYNAMIC_MACRO_RANGE
@@ -83,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_NAVIGATION] = LAYOUT_ortho_5x12(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-		KILLCLR, _______, _______, KILL,    YANK,    _C_UP,                                             _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
+		KILLCLR, ALL,     KILL,    SAVE,    YANK,    _C_UP,                                             _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
 		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,                                           _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
 		                  _______, _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______, _______),
 
@@ -195,6 +197,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
 	switch (keycode) {
+      case ALL:
+        if (record->event.pressed) {
+          mod_unshift(KC_RCTRL, KC_A);
+        }
+        return false;
+        break;
+
 		case COPY:
 			if (record->event.pressed) {
 				mod_unshift(KC_RCTRL, KC_C);
@@ -242,6 +251,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			}
 			return false;
 			break;
+
+    case SAVE:
+      if (record->event.pressed) {
+        mod_unshift(KC_RCTRL, KC_S);
+      }
+      return false;
+      break;
 
 		case UNDO:
 			if (record->event.pressed) {
