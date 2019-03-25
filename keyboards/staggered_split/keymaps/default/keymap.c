@@ -21,8 +21,8 @@
 #define _G_TAB RGUI(KC_TAB)
 
 #define _L_NAV TT(_NAVIGATION)
-#define _L_SYM1 LT(_SYMBOL, KC_ENT)
-#define _L_SYM2 LT(_SYMBOL, KC_BSPC)
+#define _L_SYM1 LT(_SYMBOL, KC_BSPC)
+#define _L_SYM2 LT(_SYMBOL, KC_ENT)
 
 #define _S_BSPC SFT_T(KC_BSPC)
 #define _S_TAB RSFT(KC_TAB)
