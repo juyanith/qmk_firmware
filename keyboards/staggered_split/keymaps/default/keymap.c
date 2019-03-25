@@ -99,9 +99,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		                  _______, _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = LAYOUT_ortho_5x12(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,                                           _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		KC_INS,  RESET,   XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,                                           _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,                                           _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,                                           _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		                  XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, _C_S_E,        _C_A_D,  XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX)
 
