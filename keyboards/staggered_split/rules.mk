@@ -76,4 +76,4 @@ LAYOUTS = ortho_5x12
 
 DEFAULT_FOLDER = staggered_split/rev2
 
-TAP_DANCE_ENABLE = yes
+TAP_DANCE_ENABLE = no

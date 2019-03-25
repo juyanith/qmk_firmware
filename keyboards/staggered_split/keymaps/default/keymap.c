@@ -31,11 +31,6 @@
 
 #define _T_QWRT TG(_QUERTY)
 
-#define _TD_ABR TD(ANGLE_BRACKETS)
-#define _TD_SBR TD(SQUARE_BRACKETS)
-#define _TD_CBR TD(CURLY_BRACES)
-#define _TD_PRN TD(PARENTHESES)
-
 extern keymap_config_t keymap_config;
 
 // Macros
@@ -62,14 +57,6 @@ enum {
 	_ADJUST
 };
 
-//Tapdance
-enum {
-	ANGLE_BRACKETS,
-	CURLY_BRACES,
-	PARENTHESES,
-  SQUARE_BRACKETS,
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_COLEMAK] = LAYOUT_ortho_5x12(
@@ -90,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
 		_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
 		_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                           KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,                                           _TD_CBR, _TD_SBR, _TD_ABR, _______, _______, _______,
+		_______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS,                                           KC_LBRC, KC_RBRC, _______, _______, _______, _______,
 		                  _______, _______, _______, _______, _ADJBS1, _______,       _______, _ADJBS2, _______, _______, _______, _______),
 
 	[_NAVIGATION] = LAYOUT_ortho_5x12(
@@ -280,80 +267,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			return true; // Process all other keycodes normally
 	}
 }
-
-void dance_angle_brackets_finished (qk_tap_dance_state_t *state, void *user_data) {
-	register_code(KC_RSFT);
-	if (state->count == 1) {
-		register_code(KC_COMMA);
-	} else {
-		register_code(KC_DOT);
-	}
-}
-
-void dance_angle_brackets_reset (qk_tap_dance_state_t *state, void *user_data) {
-	unregister_code(KC_RSFT);
-	if (state->count == 1) {
-		unregister_code(KC_COMMA);
-	} else {
-		unregister_code(KC_DOT);
-	}
-}
-
-void dance_curly_braces_finished (qk_tap_dance_state_t *state, void *user_data) {
-	register_code(KC_RSFT);
-	if (state->count == 1) {
-		register_code(KC_LBRC);
-	} else {
-		register_code(KC_RBRC);
-	}
-}
-
-void dance_curly_braces_reset (qk_tap_dance_state_t *state, void *user_data) {
-	unregister_code(KC_RSFT);
-	if (state->count == 1) {
-		unregister_code(KC_LBRC);
-	} else {
-		unregister_code(KC_RBRC);
-	}
-}
-
-void dance_parentheses_finished (qk_tap_dance_state_t *state, void *user_data) {
-	register_code(KC_RSFT);
-	if (state->count == 1) {
-		register_code(KC_9);
-	} else {
-		register_code(KC_0);
-	}
-}
-
-void dance_parentheses_reset (qk_tap_dance_state_t *state, void *user_data) {
-	unregister_code(KC_RSFT);
-	if (state->count == 1) {
-		unregister_code(KC_9);
-	} else {
-		unregister_code(KC_0);
-	}
-}
-
-void dance_square_brackets_finished (qk_tap_dance_state_t *state, void *user_data) {
-	if (state->count == 1) {
-		register_code(KC_LBRC);
-	} else {
-		register_code(KC_RBRC);
-	}
-}
-
-void dance_square_brackets_reset (qk_tap_dance_state_t *state, void *user_data) {
-	if (state->count == 1) {
-		unregister_code(KC_LBRC);
-	} else {
-		unregister_code(KC_RBRC);
-	}
-}
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-	[ANGLE_BRACKETS] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_angle_brackets_finished, dance_angle_brackets_reset),
-	[CURLY_BRACES] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_curly_braces_finished, dance_curly_braces_reset),
-	[PARENTHESES] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_parentheses_finished, dance_parentheses_reset),
-	[SQUARE_BRACKETS] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_square_brackets_finished, dance_square_brackets_reset),
-};
