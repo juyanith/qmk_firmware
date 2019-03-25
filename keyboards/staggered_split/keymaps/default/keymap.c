@@ -19,8 +19,8 @@
 
 #define _G_TAB RGUI(KC_TAB)
 
-#define _L_NAV LT(_NAVIGATION, KC_ENT)
-#define _L_SYM LT(_SYMBOL, KC_SPC)
+#define _L_NAV TT(_NAVIGATION)
+#define _L_SYM LT(_SYMBOL, KC_ENT)
 
 #define _S_BSPC SFT_T(KC_BSPC)
 #define _S_TAB RSFT(KC_TAB)
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                                              KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,
 		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                                              KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                              KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		                  KC_LGUI, KC_LALT, _C_DEL,  _S_BSPC, KC_BSPC, KC_ESC,        KC_DEL,  KC_ENT,  _L_SYM,  _L_NAV,  KC_APP, KC_INS),
+		                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_BSPC, KC_ESC,        KC_DEL,  _L_SYM,  KC_SPC,  _L_NAV,  KC_APP, KC_INS),
 
 	[_QUERTY] = LAYOUT_ortho_5x12(
     _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
