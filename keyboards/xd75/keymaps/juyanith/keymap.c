@@ -46,6 +46,8 @@
 
 #define _T_QWRT TG(_QUERTY)
 
+#define _SH_BS_ KC_SFTENT
+
 // Macros
 enum {
   ALL = SAFE_RANGE,
@@ -76,11 +78,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Colemak base
  * .--------------------------------------------------------------------------------------------------------------------------------------.
- * | ESC    | 1      | 2      | 3      | 4      | 5      | [      | `      | ]      | 6      | 7      | 8      | 9      | 0      | -      |
+ * | ESC    | 1      | 2      | 3      | 4      | 5      | [      | FIND   | ]      | 6      | 7      | 8      | 9      | 0      | -      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
  * | TAB    | Q      | W      | F      | P      | G      | HOME   | PRTSCR | END    | J      | L      | U      | Y      | ;      | =      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
- * | BACKSP | A      | R      | S      | T      | D      | PG UP  | UP     | PG DN  | H      | N      | E      | I      | O      | '      |
+ * | `      | A      | R      | S      | T      | D      | PG UP  | UP     | PG DN  | H      | N      | E      | I      | O      | '      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
  * | _      | Z      | X      | C      | V      | B      | LEFT   | DOWN   | RIGHT  | K      | M      | ,      | .      | /      | \      |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
@@ -89,11 +91,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 	[_COLEMAK] = LAYOUT(
-		KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC, KC_GRV,  KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, 
+		KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC, KC_FIND, KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, 
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_HOME, KC_PSCR, KC_END,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
-		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_PGUP, KC_UP,   KC_PGDN, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
+		KC_GRV,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_PGUP, KC_UP,   KC_PGDN, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LEFT, KC_DOWN, KC_RGHT, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_INS,  KC_RCTL),
+		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, _SH_BS_, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_INS,  KC_RCTL),
 
   [_QUERTY] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -107,14 +109,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
     _______, KC_TILD, KC_GRV,  KC_MINS, KC_PLUS, KC_UNDS, _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, _______, _______,
-		_______, _______, _______, _______, _______, _ADJBS1, _______, _______, _______, _ADJBS1, _______, _______, _______, _______, _______),
+		_______, _______, _______, _______, _______, _ADJBS1, _______, _______, _______, _ADJBS2, _______, _______, _______, _______, _______),
 
 	[_NAVIGATION] = LAYOUT(
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
     KILLCLR, ALL,     KILL,    SAVE,    YANK,    _C_UP,   _______, _______, _______, _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
-    _______, UNDO,    KILL,    SAVE,    YANK,    _C_DOWN, _______, _______, _______, _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
-		_______, _______, CUT,     COPY,    PASTE,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
+    _______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN, _______, _______, _______, _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
+		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
   [_ADJUST] = LAYOUT(
 		_C_S_E,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET, 
@@ -264,11 +266,8 @@ void matrix_init_user(void) {
 
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
-    case _COLEMAK:
-      rgblight_sethsv_white();
-      break;
     case _QUERTY:
-      rgblight_sethsv_blue();
+      rgblight_sethsv_white();
       break;
     case _SYMBOL:
       rgblight_sethsv_green();
@@ -279,9 +278,20 @@ uint32_t layer_state_set_user(uint32_t state) {
     case _NAVIGATION:
       rgblight_sethsv_red();
       break;
+    //case _COLEMAK:
     default:
-      rgblight_sethsv(225, 255, 255);
+      rgblight_sethsv_blue();
       break;
   }
   return state;
+}
+
+void led_set_user(uint8_t usb_led) {
+  if (usb_led & (1 << USB_LED_CAPS_LOCK)) {
+    capslock_led_on();
+    rgblight_mode(RGBLIGHT_MODE_BREATHING + 3);
+  } else {
+    rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+    capslock_led_off();
+  }
 }

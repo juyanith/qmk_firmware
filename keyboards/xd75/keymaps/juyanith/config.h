@@ -22,5 +22,9 @@
 // place overrides here
 #define RGBLIGHT_SLEEP 1
 #define TAPPING_TOGGLE 2
+#define PERMISSIVE_HOLD
+#define GRAVE_ESC_CTRL_OVERRIDE
+
+#define SFTENT_KEY KC_BSPC
 
 #endif
