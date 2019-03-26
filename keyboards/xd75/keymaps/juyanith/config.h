@@ -20,5 +20,6 @@
 #include "../../config.h"
 
 // place overrides here
+#define RGBLIGHT_SLEEP 1
 
 #endif
