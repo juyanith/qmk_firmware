@@ -46,7 +46,7 @@
 
 #define _T_QWRT TG(_QUERTY)
 
-#define _SH_BS_ KC_SFTENT
+#define _SH_SP_ KC_SFTENT
 
 // Macros
 enum {
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_HOME, KC_PSCR, KC_END,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
 		KC_GRV,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_PGUP, KC_UP,   KC_PGDN, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LEFT, KC_DOWN, KC_RGHT, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, _SH_BS_, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_INS,  KC_RCTL),
+		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, _SH_SP_, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_INS,  KC_RCTL),
 
   [_QUERTY] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
