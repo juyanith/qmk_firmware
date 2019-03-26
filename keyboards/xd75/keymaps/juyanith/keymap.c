@@ -255,3 +255,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;  // Process all other keycodes normally
   }
 }
+
+void matrix_init_user(void) {
+  rgblight_enable();
+  rgblight_mode(1);
+  rgblight_sethsv(325, 255, 255);
+}
+
+uint32_t layer_state_set_user(uint32_t state) {
+  switch (biton32(state)) {
+    case _COLEMAK:
+      rgblight_sethsv_white();
+      break;
+    case _QUERTY:
+      rgblight_sethsv_blue();
+      break;
+    case _SYMBOL:
+      rgblight_sethsv_green();
+      break;
+    case _ADJUST:
+      rgblight_sethsv_orange();
+      break;
+    case _NAVIGATION:
+      rgblight_sethsv_red();
+      break;
+    default:
+      rgblight_sethsv(225, 255, 255);
+      break;
+  }
+  return state;
+}

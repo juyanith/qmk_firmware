@@ -1,1 +1,1 @@
-# The default keymap for xd75, with led controls
+# A colemak layout with thumb modifiers.
