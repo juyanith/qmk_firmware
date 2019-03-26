@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Colemak base
  * .--------------------------------------------------------------------------------------------------------------------------------------.
- * | ESC    | 1      | 2      | 3      | 4      | 5      | [      | FIND   | ]      | 6      | 7      | 8      | 9      | 0      | -      |
+ * | ESC    | 1      | 2      | 3      | 4      | 5      | [      | MENU   | ]      | 6      | 7      | 8      | 9      | 0      | -      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
  * | TAB    | Q      | W      | F      | P      | G      | HOME   | PRTSCR | END    | J      | L      | U      | Y      | ;      | =      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
@@ -86,16 +86,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
  * | _      | Z      | X      | C      | V      | B      | LEFT   | DOWN   | RIGHT  | K      | M      | ,      | .      | /      | \      |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
- * | CTRL   | OS     | ALT    | CTRL   | SHIFT  | BACKSP | DELETE | CAPS   | SHIFT  | ENTER  | SPACE  | FN     | MENU   | INS    | CTRL   |
+ * | CTRL   | OS     | ALT    | CTRL   | SHIFT  | BACKSP | DELETE | CAPS   | SHIFT  | ENTER  | SPACE  | FN     | MENU   | OS     | CTRL   |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
 	[_COLEMAK] = LAYOUT(
-		KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC, KC_FIND, KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, 
+		KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC, KC_APP,  KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, 
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_HOME, KC_PSCR, KC_END,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL, 
 		KC_GRV,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_PGUP, KC_UP,   KC_PGDN, KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LEFT, KC_DOWN, KC_RGHT, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, _SH_SP_, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_INS,  KC_RCTL),
+		KC_LCTL, KC_LGUI, KC_LALT, KC_LCTL, _SH_SP_, _L_SYM1, KC_DEL,  KC_CAPS, KC_RSFT, _L_SYM2, KC_SPC,  _L_NAV,  KC_APP,  KC_RGUI,  KC_RCTL),
 
   [_QUERTY] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
