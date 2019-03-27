@@ -48,6 +48,10 @@
 
 #define _SH_SP_ KC_SFTENT
 
+#define DEFAULT_MODE RGBLIGHT_MODE_STATIC_LIGHT
+#define SHIFT_MODE (RGBLIGHT_MODE_BREATHING + 3)
+#define CTRL_MODE (RGBLIGHT_MODE_SNAKE + 5)
+
 // Macros
 enum {
   ALL = SAFE_RANGE,
@@ -57,6 +61,7 @@ enum {
 	KILLCLR,
 	PASTE,
   SAVE,
+  SHIFT,
 	UNDO,
 	YANK,
 	DYNAMIC_MACRO_RANGE
@@ -166,11 +171,55 @@ void mod_unshift(uint16_t kc_mod, uint16_t keycode) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static const uint8_t shift_bits = MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT);
+  static const uint8_t ctrl_bits = MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTL);
+
   if (!process_record_dynamic_macro(keycode, record)) {
     return false;
   }
 
   switch (keycode) {
+    case KC_LCTL:
+    case KC_RCTL:
+      if (record->event.pressed) {
+        rgblight_mode(CTRL_MODE);
+      }
+      else {
+        uint8_t mods = get_mods();
+        if (mods & shift_bits) {
+          rgblight_mode(SHIFT_MODE);
+        }
+        else {
+          rgblight_mode(DEFAULT_MODE);
+        }
+      }
+      return true;
+      break;
+
+    case KC_LSFT:
+    case KC_RSFT:
+    case KC_SFTENT:
+      if (record->event.pressed) {
+        uint8_t mods = get_mods();
+        if (mods & ctrl_bits) {
+          rgblight_mode(CTRL_MODE);
+        }
+        else {
+          rgblight_mode(SHIFT_MODE);
+        }
+      }
+      else {
+        uint8_t mods = get_mods();
+        if (mods & ctrl_bits) {
+          rgblight_mode(CTRL_MODE);
+        }
+        else {
+          rgblight_mode(DEFAULT_MODE);
+        }
+      }
+      return true;
+      break;
+
     case ALL:
       if (record->event.pressed) {
         mod_unshift(KC_RCTRL, KC_A);
@@ -289,9 +338,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 void led_set_user(uint8_t usb_led) {
   if (usb_led & (1 << USB_LED_CAPS_LOCK)) {
     capslock_led_on();
-    rgblight_mode(RGBLIGHT_MODE_BREATHING + 3);
   } else {
-    rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
     capslock_led_off();
   }
 }
