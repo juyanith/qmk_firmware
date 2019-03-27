@@ -260,8 +260,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void matrix_init_user(void) {
   rgblight_enable();
-  rgblight_mode(1);
-  rgblight_sethsv(325, 255, 255);
+  rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+  rgblight_sethsv_blue();
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
