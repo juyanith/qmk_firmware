@@ -25,6 +25,6 @@
 #define PERMISSIVE_HOLD
 #define GRAVE_ESC_CTRL_OVERRIDE
 
-#define SFTENT_KEY KC_SPC
+#define SFTENT_KEY KC_TAB
 
 #endif
