@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-#define _ADJBS1 LT(_ADJUST, KC_BSPC)
+#define _ADJBS1 LT(_ADJUST, KC_DEL)
 #define _ADJBS2 LT(_ADJUST, KC_ENT)
 
 #define _C_A_D LALT(LCTL(KC_DEL))
@@ -20,8 +20,8 @@
 
 #define _G_TAB RGUI(KC_TAB)
 
-#define _L_NAV TT(_NAVIGATION)
-#define _L_SYM1 LT(_SYMBOL, KC_BSPC)
+#define _L_NAV LT(_NAVIGATION, KC_SPC)
+#define _L_SYM1 LT(_SYMBOL, KC_DEL)
 #define _L_SYM2 LT(_SYMBOL, KC_ENT)
 
 #define _S_BSPC SFT_T(KC_BSPC)
@@ -30,6 +30,8 @@
 #define _SC_TAB RSFT(RCTL(KC_TAB))
 
 #define _T_QWRT TG(_QUERTY)
+
+#define _SHIFT_ KC_SFTENT
 
 extern keymap_config_t keymap_config;
 
@@ -62,11 +64,11 @@ enum {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_COLEMAK] = LAYOUT_ortho_5x12(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+    KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
 		KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                                              KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,
 		KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                                              KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
 		KC_UNDS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                              KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-		                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _L_SYM1, KC_ESC,        KC_DEL,  _L_SYM2, KC_SPC,  _L_NAV,  KC_APP, KC_INS),
+		                  KC_LGUI, KC_LALT, KC_LCTL, _SHIFT_, _L_SYM1, KC_DEL,        KC_DEL,  _L_SYM2, _L_NAV,  KC_RALT, KC_APP, KC_INS),
 
 	[_QUERTY] = LAYOUT_ortho_5x12(
     _______, _______, _______, _______, _______, _______,                                           _______, _______, _______, _______, _______, _______,
@@ -85,16 +87,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_NAVIGATION] = LAYOUT_ortho_5x12(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                             KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-		KILLCLR, ALL,     KILL,    SAVE,    YANK,    _C_UP,                                             _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
-		_______, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,                                           _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
+		_______, ALL,     KILL,    SAVE,    YANK,    _C_UP,                                             _C_LEFT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _C_RGHT,
+    KILLCLR, UNDO,    CUT,     COPY,    PASTE,   _C_DOWN,                                           _G_TAB,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
 		                  _______, _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______, _______),
 
 	[_ADJUST] = LAYOUT_ortho_5x12(
-    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _C_S_E,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _C_A_D,
 		XXXXXXX, _T_QWRT, XXXXXXX, XXXXXXX, XXXXXXX, _D_STA1,                                           _D_STA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_PLA1,                                           _D_PLA2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _D_STOP,                                           _D_STOP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		                  XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, _C_S_E,        _C_A_D,  XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX)
+		                  XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, RESET,         KC_PSCR, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX)
 
 };
 
