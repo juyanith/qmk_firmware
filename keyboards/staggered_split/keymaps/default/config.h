@@ -34,4 +34,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 #define EE_HANDS
 
+// place overrides here
+#define TAPPING_TOGGLE 2
+#define PERMISSIVE_HOLD
+#define GRAVE_ESC_CTRL_OVERRIDE
+
+#define SFTENT_KEY KC_TAB
+
 #endif
